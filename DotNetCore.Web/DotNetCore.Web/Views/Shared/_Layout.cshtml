@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="~/images/favicon.ico" type="image/ico" />    
+    <title>ASP.NET Core MVC - @ViewData["Title"]</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <!-- Google font -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
+        <link rel="stylesheet" href="~/css/font-awesome.min.css">
+        <!-- Custom stlylesheet -->
+        <link type="text/css" rel="stylesheet" href="~/css/style.css" />
+        <link type="text/css" rel="stylesheet" href="~/dist/sweetalert.css" />
+
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" asp-append-version="true">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
+        <!-- Google font -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet" asp-append-version="true">
+        <link rel="stylesheet" href="~/css/font-awesome.min.css" asp-append-version="true">
+        <!-- Custom stlylesheet -->
+        <link type="text/css" rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
+        <link type="text/css" rel="stylesheet" href="~/dist/sweetalert.css" asp-append-version="true"/>
+    </environment>
+</head>
+<body>
+
+    <header id="header">
+        <!-- NAV -->
+        @await Component.InvokeAsync("Header")
+        <!-- /NAV -->
+    </header>
+    <div class="body">
+        @*<partial name="_CookieConsentPartial" />*@
+        @RenderBody()
+    </div>
+    <!-- FOOTER -->
+    <footer id="footer">
+        <!-- container -->
+        @await Component.InvokeAsync("Footer")
+        <!-- /container -->
+    </footer>
+    <!-- /FOOTER -->
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/jquery.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/js/jquery.stellar.min.js"></script>
+        <script src="~/js/main.js"></script>
+        <script src="~/dist/sweetalert.js"></script>
+        <script src="~/js//gallery.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+        <script src="~/js/jquery.stellar.min.js" asp-append-version="true"></script>
+        <script src="~/js/main.js" asp-append-version="true"></script>
+        <script src="~/dist/sweetalert.js" asp-append-version="true"></script>
+        <script src="~/js//gallery.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

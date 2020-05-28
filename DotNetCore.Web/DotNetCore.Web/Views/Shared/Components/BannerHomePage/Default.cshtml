@@ -1,0 +1,78 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Data.Models
+@model BannerViewModel
+
+
+@if (Model != null)
+{
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div id="hot-post" class="row hot-post">
+            <div class="col-md-8 hot-post-left">
+                <!-- post -->
+                @if (Model.NewestPost != null)
+                {
+                    <div class="post post-thumb">
+                        <a class="post-img" href="@Model.NewestPost.Url"><img src="@Model.NewestPost.BannerUrl" alt=""></a>
+                        <div class="post-body">
+                            @if (Model.NewestPost.ListCategoryOfContent != null && Model.NewestPost.ListCategoryOfContent.Count > 0)
+                            {
+                                <div class="post-category">
+                                    @foreach (var category in Model.NewestPost.ListCategoryOfContent)
+                                    {
+                                        <a href="@category.Url">@category.Title</a>
+
+                                    }
+                                </div>
+                            }
+                            <h3 class="post-title title-lg"><a href="@Model.NewestPost.Url">@Model.NewestPost.Title</a></h3>
+                            <ul class="post-meta">
+                                @if (Model.NewestPost.Author != null)
+                                {
+                                    <li><a href="@Model.NewestPost.Author.Url">@Model.NewestPost.Author.Name</a></li>
+                                }
+                                <li>@Model.NewestPost.DatePublish</li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+                <!-- /post -->
+            </div>
+            <div class="col-md-4 hot-post-right">
+                @if (Model.TopNewestPosts != null && Model.TopNewestPosts.Count > 0)
+                {
+                    foreach (var content in Model.TopNewestPosts)
+                    {
+                        <div class="post post-thumb">
+                            <a class="post-img" href="@content.Url"><img src="@content.BannerUrl" alt=""></a>
+                            <div class="post-body">
+                                @if (content.ListCategoryOfContent != null && content.ListCategoryOfContent.Count > 0)
+                                {
+                                    <div class="post-category">
+                                        @foreach (var category in content.ListCategoryOfContent)
+                                        {
+                                            <a href="@category.Url">@category.Title</a>
+
+                                        }
+                                    </div>
+                                }
+                                <h3 class="post-title"><a href="@content.Url">@content.Title</a></h3>
+                                <ul class="post-meta">
+                                    @if (content.Author != null)
+                                    {
+                                        <li><a href="@content.Author.Url">@content.Author.Name</a></li>
+                                    }
+                                    <li>@content.DatePublish</li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+}
+

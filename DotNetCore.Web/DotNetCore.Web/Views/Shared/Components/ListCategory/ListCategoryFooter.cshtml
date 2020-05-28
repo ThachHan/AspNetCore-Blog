@@ -1,0 +1,19 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Web.Models
+@model List<CategorySimpleViewModel>
+
+
+@if (Model != null && Model.Count > 0)
+{
+<div class="footer-widget">
+    <h3 class="footer-title">Categories</h3>
+    <div class="category-widget">
+        <ul>
+            @foreach (var category in Model)
+            {
+                <li><a href="@category.Url">@category.Title <span>@category.PostTotals</span></a></li>
+            }
+        </ul>
+    </div>
+</div>
+}

@@ -1,0 +1,82 @@
+﻿@using DotNetCore.Utility;
+@using DotNetCore.Utility.ExtensionMethod;
+@model ReflectionIT.Mvc.Paging.PagingList<DotNetCore.Web.Models.ContentViewModel>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@{
+    ViewBag.Title = "Search";
+}
+
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-8">
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var content in Model)
+                    {
+        <!-- post -->
+                        <div class="post post-row">
+                            <a class="post-img" href="@content.Url"><img src="@content.BannerUrl" alt=""></a>
+                            <div class="post-body">
+                                @if (content.ListCategoryOfContent != null && content.ListCategoryOfContent.Count > 0)
+                                {
+                                    <div class="post-category">
+                                        @foreach (var category in content.ListCategoryOfContent)
+                        {
+                                            <a href="@category.Url">@category.Title</a>
+                                        }
+                                    </div>
+                                }
+                                <h3 class="post-title"><a href="@content.Url">@content.Title</a></h3>
+                                <ul class="post-meta">
+                                    @if (content.Author != null)
+                    {
+                                        <li><a href="@content.Author.Url">@content.Author.Name</a></li>
+                                    }
+                                    <li>@content.DatePublish</li>
+                                </ul>
+                                @Html.Raw(content.Summary.Truncate(200))
+                            </div>
+                        </div>
+        <!-- /post -->
+                    }
+                    <nav aria-label="Suppliers navigation example">
+                        <vc:pager paging-list="@Model" />
+                    </nav>
+                }
+            </div>
+
+            <div class="col-md-4">
+                <!-- ad widget-->
+                @await Component.InvokeAsync("Advertisement", new { advertisementPosition = Common.AdvertisementPosition.BodyTop })
+                <!-- /ad widget -->
+                <!-- social widget -->
+                @await Component.InvokeAsync("Social", new { socialPosition = Common.SocialPosition.Body })
+                <!-- /social widget -->
+                <!-- category widget -->
+                @await Component.InvokeAsync("ListCategory", new { listCategoryPosition = Common.ListCategoryPosition.Body })
+                <!-- /category widget -->
+                <!-- newsletter widget -->
+                @await Component.InvokeAsync("Newsletter", new { newsletterPosition = Common.NewsletterPosition.Body })
+                <!-- /newsletter widget -->
+                <!-- post widget -->
+                @await Component.InvokeAsync("PopularPosts")
+                <!-- /post widget -->
+                <!-- galery widget -->
+                @await Component.InvokeAsync("Galery")
+                <!-- /galery widget -->
+                <!-- Ad widget -->
+                @await Component.InvokeAsync("Advertisement", new { advertisementPosition = Common.AdvertisementPosition.BodyBottom })
+                <!-- /Ad widget -->
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

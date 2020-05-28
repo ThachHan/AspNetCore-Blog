@@ -1,0 +1,248 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="~/images/favicon.ico" type="image/ico" />
+    <title>ASP.NET Core MVC - @ViewBag.Title</title>
+    <environment include="Development">
+        <link href="~/css/admin/admin.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/css/admin/nprogress.css" rel="stylesheet" />
+        <link href="~/css/admin/green.css" rel="stylesheet" />
+        <link href="~/css/admin/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/css/admin/select2.css" />
+        <link href="~/css/admin/custom.min.css" rel="stylesheet" />
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+    </environment>
+    <environment exclude="Development">
+        <link href="~/css/admin/admin.css" rel="stylesheet" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
+        <link href="~/css/font-awesome.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/admin/nprogress.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/admin/green.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/admin/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/admin/select2.css" asp-append-version="true" />
+        <link href="~/css/admin/custom.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" asp-append-version="true" rel="stylesheet">
+
+    </environment>
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col menu_fixed">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="@Url.Action("Index", "Home")" class="site_title"><i class="fa fa-paw"></i> <span>ASP.NET Core MVC!</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+                        <div class="menu_section">
+                            <h3>Content</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="@Url.Action("Index", "Home")">
+                                        <i class="fa fa-home"></i>MainPage
+                                    </a>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-share-square-o"></i>Content<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+
+                                        <li>
+                                            @Html.ActionLink("Writed Content", "WritedContents", "Content")
+                                        </li>
+                                        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                                        {
+                                            <li>
+                                                @Html.ActionLink("Approved Content", "ApprovedContents", "Content")
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Published Content", "PublishedContents", "Content")
+                                            </li>
+                                        }
+                                        <li>
+                                            @Html.ActionLink("New Content", "Create", "Content")
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                                {
+                                    <li>
+                                        <a><i class="fa fa-object-group"></i>Category<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                @Html.ActionLink("Category", "Index", "Category")
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("New Category", "Create", "Category")
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+                                <li>
+                                    <a><i class="fa fa-picture-o"></i>Advertisement<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            @Html.ActionLink("Advertisements", "Index", "Advertisement")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("New Advertisement", "Create", "Advertisement")
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-users"></i>Author<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            @Html.ActionLink("Authors", "Index", "Author")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("New Author", "Create", "Author")
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-object-group"></i>Tag<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            @Html.ActionLink("Tags", "Index", "Tag")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("New Tag", "Create", "Tag")
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="menu_section">
+                            <h3>System</h3>
+                            <ul class="nav side-menu">
+                                @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                                {
+                                    <li>
+                                        <a><i class="fa fa-users"></i>Accounts<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                @Html.ActionLink("Accounts", "Index", "Account")
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("New Account", "Create", "Account")
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a><i class="fa fa-cogs"></i>System<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                @Html.ActionLink("System Parameters", "Index", "SystemParameter")
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("New Parameters", "Create", "SystemParameter")
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+                                <li>
+                                    <a href="@Url.Action("Index", "Home", new { Area = "" })">
+                                        <i class="fa fa-home"></i> MainPage
+                                        <span class="label label-success pull-right">Coming Soon</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        @*<div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </div>*@
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/images/user.png" alt=""> Hi @Context.Session.GetString("UserName")
+                                    <span class="fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li>
+                                        <a href="@Url.Action("EditPasswordAsync", "Account", new { Area = "Admin" })">
+                                            <i class="fa fa-sign-out pull-right"></i>Change Password
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Logout", "Account", new { Area = "Identity" })">
+                                            <i class="fa fa-sign-out pull-right"></i>Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main" id="main-body">
+                @RenderBody()
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    ASP.NET Core MVC - <a href="http://microsoft.com/">Powered by Microsoft.</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <environment include="Development">
+        <script src="~/js/jquery.min.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+        <script src="~/vendors/custom.min.js"></script>
+        <script src="~/js/admin/bootstrap-datepicker.js"></script>
+        <script src="~/js/admin/bootstrap-datepicker.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/js/site.js"></script>
+        <script src="~/js/admin/admin.js"></script>
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/vendors/custom.min.js" asp-append-version="true"></script>
+        <script src="~/js/admin/bootstrap-datepicker.js" asp-append-version="true"></script>
+        <script src="~/js/admin/bootstrap-datepicker.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/admin/admin.js" asp-append-version="true"></script>
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" asp-append-version="true"></script>
+    </environment>
+    @RenderSection("scriptsCkEditor", required: false)
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿@model DotNetCore.Web.Models.AccountViewModel
+
+@if (Model != null && !string.IsNullOrEmpty(Model.FullName))
+{
+    <li class="has-dropdown">
+        <a>Hello @Model.FullName</a>
+        <ul class="dropdown">
+            <li>
+                <a asp-controller="Account" asp-action="Logout" asp-area="Identity">Logout</a>
+            </li>
+        </ul>
+    </li>
+}
+else
+{
+    <li>
+        <a asp-controller="Account" asp-action="Login" asp-area="Identity">Login</a>
+    </li>
+}
+
+

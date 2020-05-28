@@ -1,0 +1,67 @@
+﻿@using DotNetCore.Utility;
+@model DotNetCore.Web.Models.AuthorViewModel
+@{
+    ViewBag.Title = "Author";
+}
+
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 text-center">
+                <div class="author">
+                    <img class="author-img center-block" src="@Model.ImageUrl" alt="">
+                    <h1 class="text-uppercase">@Model.Name</h1>
+                    <p class="lead">@Model.Summary</p>
+                    <ul class="author-social">
+                        <li><a href="@Model.FacebookLink"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="@Model.TwitterLink"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="@Model.GoogleLink"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="@Model.InstagramLink"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /PAGE HEADER -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-8">
+                @await Component.InvokeAsync("ContentAuthors", new { authorId = Model.AuthorId })
+            </div>
+
+            <div class="col-md-4">
+                <!-- ad widget-->
+                @await Component.InvokeAsync("Advertisement", new { advertisementPosition = Common.AdvertisementPosition.BodyTop })
+                <!-- /ad widget -->
+                <!-- social widget -->
+                @await Component.InvokeAsync("Social", new { socialPosition = Common.SocialPosition.Body })
+                <!-- /social widget -->
+                <!-- category widget -->
+                @await Component.InvokeAsync("ListCategory", new { listCategoryPosition = Common.ListCategoryPosition.Body })
+                <!-- /category widget -->
+                <!-- newsletter widget -->
+                @await Component.InvokeAsync("Newsletter", new { newsletterPosition = Common.NewsletterPosition.Body })
+                <!-- /newsletter widget -->
+                <!-- post widget -->
+                @await Component.InvokeAsync("PopularPosts")
+                <!-- /post widget -->
+                <!-- galery widget -->
+                @await Component.InvokeAsync("Galery")
+                <!-- /galery widget -->
+                <!-- Ad widget -->
+                @await Component.InvokeAsync("Advertisement", new { advertisementPosition = Common.AdvertisementPosition.BodyBottom })
+                <!-- /Ad widget -->
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

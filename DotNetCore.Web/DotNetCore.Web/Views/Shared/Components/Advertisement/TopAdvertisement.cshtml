@@ -1,0 +1,17 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Web.Models
+@model AdvertisementViewModel
+
+
+@if (Model != null)
+{
+    <div class="section-title">
+        <h2 class="title">Advertisement</h2>
+    </div>
+    <div class="aside-widget text-center">
+        <a href="@Model.Link" target="_blank" style="display: inline-block;margin: auto;">
+            <img class="img-responsive" src="@Model.BannerUrl" alt="@Model.Title">
+        </a>
+    </div>
+}
+

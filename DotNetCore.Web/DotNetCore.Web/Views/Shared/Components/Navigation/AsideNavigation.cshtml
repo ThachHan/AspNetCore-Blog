@@ -1,0 +1,17 @@
+﻿@using DotNetCore.Utility;
+@model List<DotNetCore.Data.Models.NavigationItem>
+
+
+<ul class="nav-aside-menu">
+    @await Component.InvokeAsync("User", new { userPosition = Common.UserPosition.AsideNavigation })
+    <li><a href="/">Home</a></li>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var navigationItem in Model)
+        {
+            <li><a href="@navigationItem.NavigatioUrl">@navigationItem.NavigationName</a></li>
+        }
+    }
+</ul>
+<button class="nav-close nav-aside-close"><span></span></button>
+

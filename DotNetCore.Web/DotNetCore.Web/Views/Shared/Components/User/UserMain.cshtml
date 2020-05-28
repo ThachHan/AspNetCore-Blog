@@ -1,0 +1,21 @@
+﻿@model DotNetCore.Web.Models.AccountViewModel
+
+@if(Model != null && !string.IsNullOrEmpty(Model.FullName))
+{
+<ul class="nav-menu">
+    <li class="has-dropdown">
+        <a>Hello @Model.FullName</a>
+        <div class="dropdown">
+            <div class="dropdown-body">
+                <ul class="dropdown-list">
+                    <li> <a asp-controller="Account" asp-action="Logout" asp-area="Identity">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </li>
+</ul>
+}
+else
+{
+   <button id="btn-login" class="user-btn"><i class="fa fa-user"></i></button>
+}

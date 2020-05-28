@@ -1,0 +1,149 @@
+﻿@using DotNetCore.Utility;
+@model DotNetCore.Web.Models.ContentViewModel
+@{
+    ViewBag.Title = "Detail";
+}
+
+
+<!-- Banner Content -->
+<div id="post-header" class="page-header">
+    <div class="page-header-bg" style="background-image: url(@Model.BannerUrl);" data-stellar-background-ratio="0.5"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="post-category">
+                    @if (Model.ListCategoryOfContent != null && Model.ListCategoryOfContent.Count > 0)
+                    {
+                        foreach (var category in Model.ListCategoryOfContent)
+                        {
+                            <a href="@category.Url">@category.Title</a>
+                        }
+                    }
+                </div>
+                <h1>@Model.Title</h1>
+                <ul class="post-meta">
+                    @if (Model.Author != null)
+                    {
+                        <li><a href="@Model.Author.Url">@Model.Author.Name</a></li>
+                    }
+                    <li>@Model.DatePublish</li>
+                    <li><i class="fa fa-comments"></i> @Model.TotalComments</li>
+                    <li><i class="fa fa-eye"></i> @Model.Counter</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Banner Content -->
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-8">
+                <!-- post content -->
+                <div class="section-row">
+                    <h3>@Html.Raw(Model.Summary)</h3>
+                    @Html.Raw(Model.Body)
+                </div>
+                <!-- /post content -->
+                @if (Model.Tags != null && Model.Tags.Count > 0)
+                {
+                    <!-- post tags -->
+                    <div class="section-row">
+                        <div class="post-tags">
+                            <ul>
+                                <li>TAGS:</li>
+                                @foreach (var tag in Model.Tags)
+                                {
+                                    <li><a href="@tag.TagUrl">@tag.TagName</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /post tags -->
+                }
+                <!-- post nav -->
+                <div class="section-row">
+                    <div class="post-nav">
+                        @if (Model.PreviousPost != null)
+                        {
+                            <div class="prev-post">
+                                <a class="post-img" href="@Model.PreviousPost.Url"><img src="@Model.PreviousPost.ImageUrl" alt=""></a>
+                                <h3 class="post-title"><a href="@Model.PreviousPost.Url">@Model.PreviousPost.Title</a></h3>
+                                <span>Previous post</span>
+                            </div>
+                        }
+                        @if (Model.NextPost != null)
+                        {
+                            <div class="next-post">
+                                <a class="post-img" href="@Model.NextPost.Url"><img src="@Model.NextPost.ImageUrl" alt=""></a>
+                                <h3 class="post-title"><a href="@Model.NextPost.Url">@Model.NextPost.Title</a></h3>
+                                <span>Next post</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- /post nav  -->
+                @if (Model.Author != null)
+                {
+                    <!-- post author -->
+                    <div class="section-row">
+                        <div class="section-title">
+                            <h3 class="title">About <a href="@Model.Author.Url">@Model.Author.Name</a></h3>
+                        </div>
+                        <div class="author media">
+                            <div class="media-left">
+                                <a href="@Model.Author.Url">
+                                    <img class="author-img media-object" src="@Model.Author.ImageUrl" alt="">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                @Html.Raw(Model.Author.Summary)
+                                <ul class="author-social">
+                                    <li><a href="@Model.Author.FacebookLink"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="@Model.Author.TwitterLink"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="@Model.Author.GoogleLink"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="@Model.Author.InstagramLink"><i class="fa fa-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /post author -->
+                }
+                <!-- /related post -->
+                @await Component.InvokeAsync("RelatedPosts", new { contentId = Model.ContentId })
+                <!-- /related post -->
+                @await Component.InvokeAsync("Comment", new { contentId = Model.ContentId })
+            </div>
+            <div class="col-md-4">
+                <!-- ad widget -->
+                @await Component.InvokeAsync("Advertisement", new { advertisementPosition = Common.AdvertisementPosition.BodyTop })
+                <!-- /ad widget -->
+                <!-- social widget -->
+                @await Component.InvokeAsync("Social", new { socialPosition = Common.SocialPosition.Body })
+                <!-- /social widget -->
+                <!-- category widget -->
+                @await Component.InvokeAsync("ListCategory", new { listCategoryPosition = Common.ListCategoryPosition.Body })
+                <!-- /category widget -->
+                <!-- newsletter widget -->
+                @await Component.InvokeAsync("Newsletter", new { newsletterPosition = Common.NewsletterPosition.Body })
+
+                <!-- /newsletter widget -->
+                <!-- post widget -->
+                @await Component.InvokeAsync("PopularPosts")
+                <!-- /post widget -->
+                <!-- galery widget -->
+                @await Component.InvokeAsync("Galery")
+                <!-- /galery widget -->
+                <!-- Ad widget -->
+                @await Component.InvokeAsync("Advertisement", new { advertisementPosition = Common.AdvertisementPosition.BodyBottom })
+
+                <!-- /Ad widget -->
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

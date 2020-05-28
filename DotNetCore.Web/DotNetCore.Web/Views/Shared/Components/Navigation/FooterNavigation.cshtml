@@ -1,0 +1,16 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Data.Models
+@model List<NavigationItem>
+
+
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul class="footer-nav">
+        @foreach (var navigation in Model)
+        {
+            <li><a href="@navigation.NavigatioUrl">@navigation.NavigationName</a></li>
+        }
+    </ul>
+}
+

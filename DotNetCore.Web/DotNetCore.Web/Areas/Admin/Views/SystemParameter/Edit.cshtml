@@ -1,0 +1,56 @@
+﻿;
+@model DotNetCore.Web.Areas.Admin.Models.SystemParameterViewModel
+
+@{
+    ViewBag.Title = "System Parameters";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>
+            System Parameters
+            <small>Edit</small>
+        </h3>
+    </div>
+</div>
+
+<form asp-controller="SystemParameter" asp-action="EditAsync" method="post" id="form-edit-parameter">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <span class="control-label col-md-2 col-sm-3 col-xs-12"><label asp-for="@Model.SystemParameterName"></label></span>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                @Html.EditorFor(model => model.SystemParameterName, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                @Html.ValidationMessageFor(model => model.SystemParameterName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2 col-sm-3 col-xs-12"><label asp-for="@Model.SystemParameterValue"></label></span>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                @Html.EditorFor(model => model.SystemParameterValue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SystemParameterValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2 col-sm-3 col-xs-12"><label asp-for="@Model.Description"></label></span>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-offset-3 col-md-10 col-sm-9 col-xs-12">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+

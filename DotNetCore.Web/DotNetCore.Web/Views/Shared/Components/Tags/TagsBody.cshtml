@@ -1,0 +1,19 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Web.Models
+@model List<TagViewModel>
+
+@if (Model != null && Model.Count > 0)
+{
+<div class="footer-widget">
+    <h3 class="footer-title">Tags</h3>
+    <div class="tags-widget">
+        <ul>
+            @foreach (var tag in Model)
+            {
+                <li><a href="@tag.TagUrl">@tag.TagName</a></li>
+            }
+        </ul>
+    </div>
+</div>
+}
+

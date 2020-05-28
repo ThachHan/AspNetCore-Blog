@@ -1,0 +1,20 @@
+﻿@model List<DotNetCore.Data.Models.NavigationItem>
+
+
+<div id="nav-bottom">
+    <div class="container">
+        <!-- nav -->
+        <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var navigationItem in Model)
+                {
+                    <li><a href="@navigationItem.NavigatioUrl">@navigationItem.NavigationName</a></li>
+                }
+            }
+        </ul>
+        <!-- /nav -->
+    </div>
+</div>
+

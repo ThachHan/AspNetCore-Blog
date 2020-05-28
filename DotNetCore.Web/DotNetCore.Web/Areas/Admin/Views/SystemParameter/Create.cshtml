@@ -1,0 +1,58 @@
+﻿@using  DotNetCore.Utility;
+@model DotNetCore.Web.Areas.Admin.Models.SystemParameterViewModel
+
+@{
+    ViewBag.Title = "System Parameter";
+}
+
+<div class="col-xs-12 page-title">
+    <div class="title_left">
+        <h3>
+            System Parameter
+            <small>Create</small>
+        </h3>
+    </div>
+</div>
+
+<form asp-controller="SystemParameter" asp-action="Create" method="post" id="form-create-parameter">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <span class="control-label col-md-2 col-sm-3 col-xs-12"><label asp-for="@Model.SystemParameterName"></label></span>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <select asp-for="@Model.SystemParameterName"
+                        class="form-control"
+                        asp-items="@Model.SystemParamaterNames"></select>
+                <span asp-validation-for="@Model.SystemParameterName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2 col-sm-3 col-xs-12"><label asp-for="@Model.SystemParameterValue"></label></span>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <input asp-for="@Model.SystemParameterValue" id="SystemParameterValue" class="form-control" >
+                <span asp-validation-for="@Model.SystemParameterValue" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2 col-sm-3 col-xs-12"><label asp-for="@Model.Description"></label></span>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <input asp-for="@Model.Description" id="Description" class="form-control" >
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-offset-3 col-md-10 col-sm-9 col-xs-12">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+

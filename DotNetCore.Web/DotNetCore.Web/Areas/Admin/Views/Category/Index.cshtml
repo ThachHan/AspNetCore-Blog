@@ -1,0 +1,94 @@
+﻿@model List<DotNetCore.Web.Areas.Admin.Models.CategoryViewModel>
+@{
+    ViewBag.Title = "Category";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Categories</h3>
+    </div>
+    <div class="title_right">
+        <div class="pull-right">
+            <a asp-controller="Category" asp-area="Admin"
+               asp-action="Create" class="btn btn-primary">New Category</a>
+        </div>
+    </div>
+</div>
+
+<div class="main-content">
+
+    <table class="table table-hover">
+        <thead class="thead-inverse">
+            <tr>
+                <th class="width-1">
+                    ID
+                </th>
+                <th class="width-5">
+                    GroupName
+                </th>
+                <th class="width-5">
+                    GroupParent
+                </th>
+                <th class="width-2">
+                    Status
+                </th>
+                <th class="width-4">
+                    Layout
+                </th>
+                <th class="width-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var category in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => category.CategoryId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => category.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => category.CategoryParentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => category.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => category.CategoryLayoutName)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="@Url.Action("Edit", new { id = category.CategoryId })" class="btn btn-default">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                </a>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+
+                                <ul class="dropdown-menu btn-dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="@Url.Action("Details", new { id = category.CategoryId })">
+                                            <i class="fa fa-eye" aria-hidden="true"></i> View
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Delete", new { id = category.CategoryId })">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+    </table>
+
+</div>
+

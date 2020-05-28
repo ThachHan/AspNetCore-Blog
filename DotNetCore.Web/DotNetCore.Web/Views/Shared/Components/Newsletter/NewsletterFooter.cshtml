@@ -1,0 +1,17 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Data.Models
+@model SubscribeViewModel
+
+
+<div class="footer-widget">
+    <h3 class="footer-title">Newsletter</h3>
+    <div class="newsletter-widget">
+        <form id="form-subscribe-footer">
+            @Html.AntiForgeryToken()
+            <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
+            <input asp-for="@Model.Email" class="input" name="Email" placeholder="Enter Your Email" type="email" required>
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+            <button id="submit-subscribe-footer" class="primary-button">Subscribe</button>
+        </form>
+    </div>
+</div>

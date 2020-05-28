@@ -1,0 +1,31 @@
+﻿@using DotNetCore.Web.Models
+@model PostCommentViewModel
+
+
+<!-- post reply -->
+@if (Model != null && Model.IsAllowComment)
+{
+    <div class="section-row">
+        <div class="section-title">
+            <h3 class="title">Leave a reply</h3>
+        </div>
+        <form class="post-reply" id="form-comment">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <input asp-for="@Model.ContentId" type="hidden" />
+                <input asp-for="@Model.CommentParentId" type="hidden" />
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <textarea class="input" asp-for="@Model.Body" placeholder="Message"></textarea>
+                        <span asp-validation-for="@Model.Body" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button id="btn-send-comment" class="primary-button">Submit</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <!-- /post reply -->
+}

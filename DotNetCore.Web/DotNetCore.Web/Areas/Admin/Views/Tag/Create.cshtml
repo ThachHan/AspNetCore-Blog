@@ -1,0 +1,40 @@
+﻿
+@model DotNetCore.Web.Areas.Admin.Models.TagViewModel
+
+@{
+    ViewBag.Title = "Tag";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>
+            Tag
+            <small>Create</small>
+        </h3>
+    </div>
+</div>
+
+<div class="main-content">
+    <form asp-controller="Tag" asp-action="CreateAsync" method="post" id="form-author-create" enctype="multipart/form-data">
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                <label asp-for="@Model.TagName" class="control-label col-md-2 col-sm-3 col-xs-12"></label>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input asp-for="@Model.TagName" id="TagName" class="form-control" >
+                    <span asp-validation-for="@Model.TagName" class="text-danger"></span>
+                </div>
+            </div>            
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-sm-offset-3 col-md-10 col-sm-9 col-xs-12">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

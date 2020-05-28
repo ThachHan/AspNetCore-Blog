@@ -1,0 +1,32 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Web.Models
+@model SocialViewModel
+
+
+<div class="aside-widget">
+    <div class="section-title">
+        <h2 class="title">Social Media</h2>
+    </div>
+    <div class="social-widget">
+        <ul>
+            <li>
+                <a href="@Model.FacebookLink" target="_blank" class="social-facebook">
+                    <i class="fa fa-facebook"></i>
+                    <span>@Model.FacebookFollowers<br>Followers</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Model.TwitterLink" target="_blank" class="social-twitter">
+                    <i class="fa fa-twitter"></i>
+                    <span>@Model.TwitterFollowers<br>Followers</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Model.GoogleLink" target="_blank" class="social-google-plus">
+                    <i class="fa fa-google-plus"></i>
+                    <span>@Model.GoogleFollowers<br>Followers</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

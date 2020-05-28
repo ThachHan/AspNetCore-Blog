@@ -1,0 +1,53 @@
+﻿@model List<DotNetCore.Web.Areas.Admin.Models.ContentViewModel>
+@{
+    ViewBag.Title = "Published Contents";
+}
+<div class="page-title">
+    <div class="title_left">
+        <h3>
+            Published Contents
+        </h3>
+    </div>
+</div>
+
+<div class="main-content">
+    <table class="table table-hover">
+        <thead class="thead-inverse">
+            <tr>
+                <th class="width-14">
+                    HeadLine
+                </th>
+                <th class="width-6">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var content in Model)
+                {
+                    <tr>
+                        <td>
+                            @content.Title
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="@Url.Action("Details", new { id = content.ContentId })" class="btn btn-default">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i> Detail
+                                </a>
+                                <a asp-controller="Comment" asp-action="LoadCommentAsync" asp-route-id="@content.ContentId" class="btn btn-default">
+                                    <i class="fa fa-eye" aria-hidden="true"></i> Load Comment
+                                </a>
+                                <a data-contentid="@content.ContentId" class="btn btn-default btn-reject">
+                                    <i class="fa fa-ban" aria-hidden="true"></i> Reject
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+</div>

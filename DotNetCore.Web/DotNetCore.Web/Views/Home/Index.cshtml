@@ -1,0 +1,78 @@
+﻿@using DotNetCore.Utility;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    @await Component.InvokeAsync("BannerHomePage")
+    <!-- /container -->
+</div>
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-8">
+                <!-- row -->
+                @await Component.InvokeAsync("RecentPosts")
+                <!-- /row -->
+                <!-- row -->
+                @await Component.InvokeAsync("ContentEveryCategory", new { contentPosition = Common.ContentPosition.Top })
+                <!-- /row -->
+            </div>
+            <div class="col-md-4">
+                <!-- ad widget-->
+                @await Component.InvokeAsync("Advertisement", new { advertisementPosition = Common.AdvertisementPosition.BodyTop })
+                <!-- /ad widget -->
+                <!-- social widget -->
+                @await Component.InvokeAsync("Social", new { socialPosition = Common.SocialPosition.Body })
+                <!-- /social widget -->
+                <!-- category widget -->
+                @await Component.InvokeAsync("ListCategory", new { listCategoryPosition = Common.ListCategoryPosition.Body })
+                <!-- /category widget -->
+                <!-- newsletter widget -->
+                @await Component.InvokeAsync("Newsletter", new { newsletterPosition = Common.NewsletterPosition.Body })
+                <!-- /newsletter widget -->
+                <!-- post widget -->
+                @await Component.InvokeAsync("PopularPosts")
+                <!-- /post widget -->
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+<!-- SECTION -->
+<div class="section">
+    @await Component.InvokeAsync("Advertisement", new { advertisementPosition = Common.AdvertisementPosition.BodyCenter })
+</div>
+<!-- /SECTION -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-8">
+                @await Component.InvokeAsync("ContentEveryCategory", new { contentPosition = Common.ContentPosition.Bottom })
+
+            </div>
+            <div class="col-md-4">
+                <!-- galery widget -->
+                @await Component.InvokeAsync("Galery")
+                <!-- /galery widget -->
+                <!-- Ad widget -->
+                @await Component.InvokeAsync("Advertisement", new { advertisementPosition = Common.AdvertisementPosition.BodyBottom })
+
+                <!-- /Ad widget -->
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

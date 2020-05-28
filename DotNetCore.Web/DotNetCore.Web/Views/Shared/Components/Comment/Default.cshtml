@@ -1,0 +1,61 @@
+﻿@using DotNetCore.Web.Models
+@model CommentViewModel
+
+
+
+<!-- post comments -->
+<div class="section-row">
+    <div class="section-title">
+        <h3 class="title">@Model.TotalComment Comments</h3>
+    </div>
+    <div class="post-comments">
+        @if (Model.UserComments != null && Model.UserComments.Count > 0)
+        {
+            foreach (var comment in Model.UserComments)
+            {
+                <!-- comment -->
+                <div class="media">
+                    <div class="media-left">
+                        <img class="media-object" src="~/images/avatar-user.jpg" alt="">
+                    </div>
+                    <div class="media-body">
+                        <div class="media-heading">
+                            <h4>@comment.UserComment.FullName</h4>
+                            <span class="time">@comment.CreatedDate</span>
+                        </div>
+                        <p>@comment.Body</p>
+                        @if (Model.IsAllowComment)
+                        {
+                            <a href="#" @*id="btn-reply-comment"*@ data-commentid="@comment.Id" class="reply">Reply</a>
+                        }
+                        @if (comment.replyViewModels != null && comment.replyViewModels.Count > 0)
+                        {
+                            foreach (var replyComment in comment.replyViewModels)
+                            {
+                                <div class="media media-author">
+                                    <div class="media-left">
+                                        <img class="media-object" src="~/images/avatar-user.jpg" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="media-heading">
+                                            <h4>@replyComment.UserComment.FullName</h4>
+                                            <span class="time">@replyComment.CreatedDate</span>
+                                        </div>
+                                        <p>@replyComment.Body</p>
+                                    </div>
+                                </div>
+                            }
+
+                        }
+                    </div>
+                </div>
+                
+                <!-- /comment -->
+            }
+
+        }
+        <!-- comment -->
+    </div>
+</div>
+<!-- /post comments -->
+@await Component.InvokeAsync("PostComment", new { contentId = Model.ContentId })

@@ -1,0 +1,43 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Web.Models
+@using DotNetCore.Utility;
+@model SummaryWebsiteViewModel
+
+
+<div class="container">
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="footer-widget">
+                <div class="footer-logo">
+                    <a href="/" class="logo"><img src="@Model.SiteLogoUrl" alt=""></a>
+                </div>
+                <p>@Model.SiteDescription</p>
+                @await Component.InvokeAsync("Social", new { socialPosition = Common.SocialPosition.Footer })
+            </div>
+        </div>
+        <div class="col-md-3">
+            @await Component.InvokeAsync("ListCategory", new { listCategoryPosition = Common.ListCategoryPosition.Footer })
+        </div>
+        <div class="col-md-3">
+            @await Component.InvokeAsync("Tags", new { tagPosition = Common.TagPosition.Footer })
+        </div>
+        <div class="col-md-3">
+            @await Component.InvokeAsync("Newsletter", new { newsletterPosition = Common.NewsletterPosition.Footer })
+        </div>
+    </div>
+    <!-- /row -->
+    <!-- row -->
+    <div class="footer-bottom row">
+        <div class="col-md-6 col-md-push-6">
+            @await Component.InvokeAsync("Navigation", new { navigationPosition = Common.NavigationPosition.Footer })
+        </div>
+        <div class="col-md-6 col-md-pull-6">
+            <div class="footer-copyright">
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script> @Html.Raw(Model.CopyRight)
+            </div>
+        </div>
+    </div>
+    <!-- /row -->
+</div>

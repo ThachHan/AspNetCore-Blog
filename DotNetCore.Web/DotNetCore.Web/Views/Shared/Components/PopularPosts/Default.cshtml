@@ -1,0 +1,36 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Web.Models
+@using DotNetCore.Utility.ExtensionMethod
+@model List<ContentViewModel>
+
+
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="aside-widget">
+        <div class="section-title">
+            <h2 class="title">Popular Posts</h2>
+        </div>
+        @foreach (var post in Model)
+        {
+            <!-- post -->
+            <div class="post post-widget">
+                <a class="post-img" href="@post.Url"><img src="@post.BannerUrl" alt=""></a>
+                <div class="post-body">
+                    <div class="post-category">
+                        @if (post.ListCategoryOfContent != null && post.ListCategoryOfContent.Count > 0)
+                        {
+                            foreach (var category in post.ListCategoryOfContent)
+                            {
+                                <a href="@category.Url">@category.Title</a>
+                            }
+                        }
+
+                    </div>
+                    <h3 class="post-title"><a href="@post.Url">@post.Title.Truncate(60)</a></h3>
+                </div>
+            </div>
+            <!-- /post -->
+        }
+    </div>
+}

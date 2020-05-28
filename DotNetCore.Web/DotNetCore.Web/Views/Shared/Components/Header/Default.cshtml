@@ -1,0 +1,52 @@
+﻿@using DotNetCore.Web
+@using DotNetCore.Data.Models
+@using DotNetCore.Utility;
+@model HeaderViewModel
+
+
+
+<div id="nav">
+    <!-- Top Nav -->
+    <div id="nav-top">
+        <div class="container">
+            <!-- social -->
+            @await Component.InvokeAsync("Social", new { socialPosition = Common.SocialPosition.Navigation })
+            <!-- /social -->
+            @if (!string.IsNullOrEmpty(Model.SiteLogoUrl))
+            {
+                <!-- logo -->
+                <div class="nav-logo">
+                    <a href="/" class="logo"><img src="@Model.SiteLogoUrl" alt="Logo"></a>
+                </div>
+                <!-- /logo -->
+            }
+            <!-- search & aside toggle -->
+                <div class="nav-btns">
+                    <button class="aside-btn"><i class="fa fa-bars"></i></button>
+                    <button class="search-btn"><i class="fa fa-search"></i></button>
+                    <div id="nav-search">
+                        <form id="form-search" asp-controller="Content" asp-action="SearchAsync" method="get">
+                            <input class="input" name="search" id="auto-search" placeholder="Enter your search...">
+                        </form>
+                        <button class="nav-close search-close">
+                            <span></span>
+                        </button>
+                    </div>
+                    @await Component.InvokeAsync("User", new { userPosition = Common.UserPosition.MainHeader })
+
+                </div>
+            <!-- /search & aside toggle -->
+        </div>
+    </div>    <!-- /Top Nav -->
+    <!-- Main Nav -->
+    <div id="nav-bottom">
+        @await Component.InvokeAsync("Navigation", new { navigationPosition = Common.NavigationPosition.Main })
+        <!-- /Main Nav -->
+    </div>
+    <!-- Aside Nav -->
+    <div id="nav-aside">
+        @await Component.InvokeAsync("Navigation", new { navigationPosition = Common.NavigationPosition.Aside })
+        <!-- /Aside Nav -->
+    </div>
+</div>
+

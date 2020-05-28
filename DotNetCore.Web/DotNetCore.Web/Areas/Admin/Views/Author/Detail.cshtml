@@ -1,0 +1,83 @@
+﻿
+@model DotNetCore.Web.Areas.Admin.Models.AuthorViewModel
+
+@{
+    ViewBag.Title = "Author";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>
+            Author
+            <small>Details</small>
+        </h3>
+    </div>
+</div>
+
+<div class="main-content">
+    <form asp-controller="Author" asp-action="null" method="post" id="form-author-create" enctype="multipart/form-data">
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                <label asp-for="@Model.FirstName" class="control-label col-md-2 col-sm-3 col-xs-12"></label>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input asp-for="@Model.FirstName" id="FirstName" class="form-control" readonly>
+                    <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.LastName" class="control-label col-md-2 col-sm-3 col-xs-12"></label>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input asp-for="@Model.LastName" id="LastName" class="form-control"  readonly>
+                    <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ImageUrl" class="control-label col-md-2 col-sm-3 col-xs-12"></label>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                    <img src="@Model.ImageUrl" />
+                    <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Summary" class="control-label col-md-2 col-sm-3 col-xs-12"></label>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input asp-for="@Model.Summary" id="Summary" class="form-control"  readonly>
+                    <span asp-validation-for="@Model.Summary" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.FacebookLink" class="control-label col-md-2 col-sm-3 col-xs-12"></label>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input asp-for="@Model.FacebookLink" id="FacebookLink" class="form-control"  readonly>
+                    <span asp-validation-for="@Model.FacebookLink" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.TwitterLink" class="control-label col-md-2 col-sm-3 col-xs-12"></label>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input asp-for="@Model.TwitterLink" id="TwitterLink" class="form-control"  readonly>
+                    <span asp-validation-for="@Model.TwitterLink" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.GoogleLink" class="control-label col-md-2 col-sm-3 col-xs-12"></label>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input asp-for="@Model.GoogleLink" id="GoogleLink" class="form-control"  readonly>
+                    <span asp-validation-for="@Model.GoogleLink" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.InstagramLink" class="control-label col-md-2 col-sm-3 col-xs-12"></label>
+                <div class="col-md-10 col-sm-9 col-xs-12">
+                    <input asp-for="@Model.InstagramLink" id="InstagramLink" class="form-control"  readonly>
+                    <span asp-validation-for="@Model.InstagramLink" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
